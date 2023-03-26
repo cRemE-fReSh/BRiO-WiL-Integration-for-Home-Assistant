@@ -1,0 +1,45 @@
+input_select:
+  pool_uws_mode:
+    name: Pool Unterwasserscheinwerfer Modus
+    options:
+      - Warmweiß (0)
+      - Kaltweis (1)
+      - Blau (2)
+      - Lagunenblau (3)
+      - Cyan (4)
+      - Violett (5)
+      - Magenta (6)
+      - Rosa (7)
+      - Rot (8)
+      - Orange (9)
+      - Grün (10)
+      - Fast Gradient (16)
+      - Slow Rainbow (17)
+      - Colours Parade (18)
+      - Techno (19)
+      - Blue Variations (20)
+      - Random Parade (21)
+      - Random Colours (22)
+    initial: Warmweiß (0)
+    icon: mdi:tune-vertical
+  pool_uws_brightness:
+    name: Pool Unterwasserscheinwerfer Helligkeit
+    options:
+      - Niedrig (0)
+      - Mittel (1)
+      - Hoch (2)
+      - Maximal (3)
+    initial: Maximal (3)
+    icon: mdi:brightness-6
+  pool_uws_speed:
+    name: Pool Unterwasserscheinwerfer Geschwindigkeit
+    options:
+      - Niedrig (0)
+      - Mittel (1)
+      - Hoch (2)
+    initial: Hoch (2)
+    icon: mdi:play-speed
+input_boolean:
+  pool_uws_powerswitch:
+    name: Pool Unterwasserscheinwerfer
+    icon: mdi:light-recessed

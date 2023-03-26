@@ -1,0 +1,825 @@
+[
+    {
+        "id": "653025e2b36a7e72",
+        "type": "tab",
+        "label": "Poolbeleuchtung",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2bdc51a1b02b792d",
+        "type": "inject",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 700,
+        "wires": [
+            [
+                "1f02efad119acce3"
+            ]
+        ]
+    },
+    {
+        "id": "1f02efad119acce3",
+        "type": "tcp request",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "server": "192.168.188.133",
+        "port": "30302",
+        "out": "time",
+        "ret": "string",
+        "splitc": "0",
+        "newline": "",
+        "trim": false,
+        "tls": "",
+        "x": 340,
+        "y": 700,
+        "wires": [
+            [
+                "6c24733d447dba69",
+                "3e7d4d8388f3a8ad",
+                "79bfb8921557ef75",
+                "f4dfcb3c879f20c0"
+            ]
+        ]
+    },
+    {
+        "id": "6c24733d447dba69",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "Mode",
+        "func": "switch (parseInt(msg.payload.substring(64, 66), 16)) {\n    case 0:\n        msg.payload = \"Warmweiß (0)\"; break;\n    case 1:\n        msg.payload = \"Kaltweis (1)\"; break;\n    case 2:\n        msg.payload = \"Blau (2)\"; break;\n    case 3:\n        msg.payload = \"Lagunenblau (3)\"; break;\n    case 4:\n        msg.payload = \"Cyan (4)\"; break;\n    case 5:\n        msg.payload = \"Violett (5)\"; break;\n    case 6:\n        msg.payload = \"Magenta (6)\"; break;\n    case 7:\n        msg.payload = \"Rosa (7)\"; break;\n    case 8:\n        msg.payload = \"Rot (8)\"; break;\n    case 9:\n        msg.payload = \"Orange (9)\"; break;\n    case 10:\n        msg.payload = \"Grün (10)\"; break;\n    case 16:\n        msg.payload = \"Fast Gradient (16)\"; break;\n    case 17:\n        msg.payload = \"Slow Rainbow (17)\"; break;\n    case 18:\n        msg.payload = \"Colours Parade (18)\"; break;\n    case 19:\n        msg.payload = \"Techno (19)\"; break;\n    case 20:\n        msg.payload = \"Blue Variations (20)\"; break;\n    case 21:\n        msg.payload = \"Random Parade (21)\"; break;\n    case 22:\n        msg.payload = \"Random Colours (22)\"; break;\n    default:\n        msg.payload = \"Error\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 680,
+        "wires": [
+            [
+                "701a9d39a26418fb"
+            ]
+        ]
+    },
+    {
+        "id": "3e7d4d8388f3a8ad",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "State",
+        "func": "msg.payload = parseInt(msg.payload.substring(33, 34));\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 620,
+        "wires": [
+            [
+                "a4ab34733829f488"
+            ]
+        ]
+    },
+    {
+        "id": "79bfb8921557ef75",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "Brightness",
+        "func": "switch (parseInt(msg.payload.substring(71, 72), 16) / 4) {\n    case 0:\n        msg.payload = \"Niedrig (0)\";\n        break;\n    case 1:\n        msg.payload = \"Mittel (1)\";\n        break;\n    case 2:\n        msg.payload = \"Hoch (2)\";\n        break;\n    case 3:\n        msg.payload = \"Maximal (3)\";\n        break;    \n    default:\n        msg.payload = \"Error\";\n} \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 740,
+        "wires": [
+            [
+                "e8ec2211664323dc"
+            ]
+        ]
+    },
+    {
+        "id": "13e644bcb1f405df",
+        "type": "trigger-state",
+        "z": "653025e2b36a7e72",
+        "name": "Change Speed",
+        "server": "ed0e528f.b8b9f",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "input_select.pool_uws_speed",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [],
+        "inputs": 0,
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "enableInput": false,
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "43f0e3ec0de74f19"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "43f0e3ec0de74f19",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "TCP Data",
+        "func": "var buffer;\n\nbuffer = msg.payload.split(\"(\");\nbuffer = buffer[1].replace(\")\", \"\");\nbuffer = parseInt(buffer);\n\nbuffer = \"{\\\"pspd\\\":\" + buffer + \"}\"\n\nmsg.payload = buffer;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 340,
+        "wires": [
+            [
+                "946ffd209f2589d8"
+            ]
+        ]
+    },
+    {
+        "id": "946ffd209f2589d8",
+        "type": "tcp request",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "server": "192.168.188.133",
+        "port": "30302",
+        "out": "time",
+        "ret": "buffer",
+        "splitc": "0",
+        "newline": "",
+        "trim": false,
+        "tls": "",
+        "x": 640,
+        "y": 340,
+        "wires": [
+            [
+                "08c664f29688dc43"
+            ]
+        ]
+    },
+    {
+        "id": "c13865f1bab4b63e",
+        "type": "trigger-state",
+        "z": "653025e2b36a7e72",
+        "name": "Change Brightness",
+        "server": "ed0e528f.b8b9f",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "input_select.pool_uws_brightness",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [],
+        "inputs": 0,
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "enableInput": false,
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "cbf9337781a6d786"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cbf9337781a6d786",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "TCP Data",
+        "func": "var buffer;\n\nbuffer = msg.payload.split(\"(\");\nbuffer = buffer[1].replace(\")\", \"\");\nbuffer = parseInt(buffer);\n\nbuffer = \"{\\\"plum\\\":\" + buffer + \"}\"\n\nmsg.payload = buffer;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "320c9a6ab123939b"
+            ]
+        ]
+    },
+    {
+        "id": "320c9a6ab123939b",
+        "type": "tcp request",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "server": "192.168.188.133",
+        "port": "30302",
+        "out": "time",
+        "ret": "buffer",
+        "splitc": "0",
+        "newline": "",
+        "trim": false,
+        "tls": "",
+        "x": 640,
+        "y": 400,
+        "wires": [
+            [
+                "08c664f29688dc43"
+            ]
+        ]
+    },
+    {
+        "id": "3da288b6630eb102",
+        "type": "trigger-state",
+        "z": "653025e2b36a7e72",
+        "name": "Change Mode",
+        "server": "ed0e528f.b8b9f",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "input_select.pool_uws_mode",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [],
+        "inputs": 0,
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "enableInput": false,
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "0672f5e12b9f5ed5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0672f5e12b9f5ed5",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "TCP Data",
+        "func": "var buffer;\n\nbuffer = msg.payload.split(\"(\");\nbuffer = buffer[1].replace(\")\", \"\");\nbuffer = parseInt(buffer);\n\nbuffer = \"{\\\"prcn\\\":\" + buffer + \"}\"\n\nmsg.payload = buffer;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 460,
+        "wires": [
+            [
+                "74d1cbca96323148"
+            ]
+        ]
+    },
+    {
+        "id": "74d1cbca96323148",
+        "type": "tcp request",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "server": "192.168.188.133",
+        "port": "30302",
+        "out": "time",
+        "ret": "buffer",
+        "splitc": "0",
+        "newline": "",
+        "trim": false,
+        "tls": "",
+        "x": 640,
+        "y": 460,
+        "wires": [
+            [
+                "08c664f29688dc43"
+            ]
+        ]
+    },
+    {
+        "id": "e8ec2211664323dc",
+        "type": "api-call-service",
+        "z": "653025e2b36a7e72",
+        "name": "Return Brightness",
+        "server": "ed0e528f.b8b9f",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "input_select",
+        "service": "select_option",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_select.pool_uws_brightness"
+        ],
+        "data": "{\"option\":msg.payload}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 790,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4dfcb3c879f20c0",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "Speed",
+        "func": "switch (parseInt(msg.payload.substring(70, 71), 16) - 4) {\n    case 0:\n        msg.payload = \"Niedrig (0)\";\n        break;\n    case 1:\n        msg.payload = \"Mittel (1)\";\n        break;\n    case 2:\n        msg.payload = \"Hoch (2)\";\n        break; \n    default:\n        msg.payload = \"Error\";\n} \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 800,
+        "wires": [
+            [
+                "9f3ecb640de43ee1"
+            ]
+        ]
+    },
+    {
+        "id": "9f3ecb640de43ee1",
+        "type": "api-call-service",
+        "z": "653025e2b36a7e72",
+        "name": "Return Speed 0",
+        "server": "ed0e528f.b8b9f",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "input_select",
+        "service": "select_option",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_select.pool_uws_speed"
+        ],
+        "data": "{\"option\":msg.payload}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 780,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "701a9d39a26418fb",
+        "type": "api-call-service",
+        "z": "653025e2b36a7e72",
+        "name": "Return Mode",
+        "server": "ed0e528f.b8b9f",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "input_select",
+        "service": "select_option",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_select.pool_uws_mode"
+        ],
+        "data": "{\"option\":msg.payload}",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 770,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "08c664f29688dc43",
+        "type": "delay",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 900,
+        "y": 380,
+        "wires": [
+            [
+                "fe5ff51ebae76e15"
+            ]
+        ]
+    },
+    {
+        "id": "fe5ff51ebae76e15",
+        "type": "switch",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1050,
+        "y": 380,
+        "wires": [
+            [
+                "1f02efad119acce3"
+            ]
+        ]
+    },
+    {
+        "id": "000d8a4641390d36",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "TCP Data",
+        "func": "switch (msg.hassState) {\n    case false:\n        msg.payload = \"{\\\"sprj\\\":0}\";\n        break;\n    case true:\n        msg.payload = \"{\\\"sprj\\\":1}\";\n        break;\n    default:\n        msg.payload = \"Error\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "f8f5516b6d29f601"
+            ]
+        ]
+    },
+    {
+        "id": "f8f5516b6d29f601",
+        "type": "tcp request",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "server": "192.168.188.133",
+        "port": "30302",
+        "out": "time",
+        "ret": "buffer",
+        "splitc": "0",
+        "newline": "",
+        "trim": false,
+        "tls": "",
+        "x": 640,
+        "y": 280,
+        "wires": [
+            [
+                "08c664f29688dc43"
+            ]
+        ]
+    },
+    {
+        "id": "da6bf8763241ce21",
+        "type": "api-call-service",
+        "z": "653025e2b36a7e72",
+        "name": "Return On",
+        "server": "ed0e528f.b8b9f",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "input_boolean",
+        "service": "turn_on",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_boolean.pool_uws_powerswitch"
+        ],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 870,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "35ac253461f31dbb",
+        "type": "api-call-service",
+        "z": "653025e2b36a7e72",
+        "name": "Return Off",
+        "server": "ed0e528f.b8b9f",
+        "version": 5,
+        "debugenabled": false,
+        "domain": "input_boolean",
+        "service": "turn_off",
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [
+            "input_boolean.pool_uws_powerswitch"
+        ],
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 870,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a4ab34733829f488",
+        "type": "switch",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 710,
+        "y": 620,
+        "wires": [
+            [
+                "35ac253461f31dbb"
+            ],
+            [
+                "da6bf8763241ce21"
+            ]
+        ]
+    },
+    {
+        "id": "f03c8b21d0bb3965",
+        "type": "tcp request",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "server": "192.168.188.133",
+        "port": "30302",
+        "out": "time",
+        "ret": "string",
+        "splitc": "0",
+        "newline": "",
+        "trim": false,
+        "tls": "",
+        "x": 560,
+        "y": 200,
+        "wires": [
+            [
+                "e1b3f62c249b37b3"
+            ]
+        ]
+    },
+    {
+        "id": "e1b3f62c249b37b3",
+        "type": "function",
+        "z": "653025e2b36a7e72",
+        "name": "State",
+        "func": "var hassState = msg.hassState; //boolean\nvar wilState = parseInt(msg.payload.substring(33, 34)); //int\nvar setWilState = false;\n\nswitch (hassState) {\n    case false:\n        if (wilState == 2) setWilState = true;\n        break;\n    case true:\n        if (wilState == 0) setWilState = true;\n        break;\n    default:\n}\nmsg.payload = setWilState;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "76d180b9b220d258"
+            ]
+        ]
+    },
+    {
+        "id": "b17e808a337ccb24",
+        "type": "trigger-state",
+        "z": "653025e2b36a7e72",
+        "name": "Change State",
+        "server": "ed0e528f.b8b9f",
+        "version": 2,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "input_boolean.pool_uws_powerswitch",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "property",
+                "propertyValue": "",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": ""
+            }
+        ],
+        "inputs": 0,
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "habool",
+        "enableInput": false,
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [],
+            [
+                "f3d34c92f7ff7d25"
+            ]
+        ]
+    },
+    {
+        "id": "f3d34c92f7ff7d25",
+        "type": "change",
+        "z": "653025e2b36a7e72",
+        "name": "C1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "hassState",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "39035f85a63d3d83"
+            ]
+        ]
+    },
+    {
+        "id": "39035f85a63d3d83",
+        "type": "change",
+        "z": "653025e2b36a7e72",
+        "name": "C2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "f03c8b21d0bb3965"
+            ]
+        ]
+    },
+    {
+        "id": "76d180b9b220d258",
+        "type": "switch",
+        "z": "653025e2b36a7e72",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "000d8a4641390d36"
+            ]
+        ]
+    },
+    {
+        "id": "46835a02d54b28cc",
+        "type": "comment",
+        "z": "653025e2b36a7e72",
+        "name": "Comment compare states",
+        "info": "For On/Off it's required to check the original state of the device, because there's no separate on/off command but only a toggle command.",
+        "x": 310,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ed0e528f.b8b9f",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 5,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": 30,
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": true
+    }
+]
