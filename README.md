@@ -6,7 +6,7 @@ This is not an official integration of the manufacturer of the device. Also, I a
 
 Please review the license before usage.
 
-## Info
+## Info
 
 This solution integrates the CCEI BRiO WiL into Home Assistant usind Node-RED via TCP commands. BRiO WiL is used to control pool underwater spotlights via WiFi and Bluetooth using the App of the manufacturer.
 
@@ -14,21 +14,21 @@ Trying this out, you should already be firm in using nodeRed.
 
 Please understand that some wording within the integration is in German language, especially all texts that are visible in the Home Assistant dashboards. Any translator helps ;-)
 
-## Integration
+## Integration
 
 The integration consists of two elements: Node-RED flow and a few inputs, that have to be added to the configuration.yaml.
 
-### Prerequisite
+### Prerequisite
 
 The BRiO WiL device must be connected to the same network (LAN/WiFi) as Node-RED and therefore reachable from the Node-RED host.
 
-### Node-RED
+### Node-RED
 
 You can import the flow from folder Node-RED in this repository.
 
 Please ensure that you change the IP adress within **ALL** TCP requests within the flow to the IP adress of your own device.
 
-### Home Assistant
+### Home Assistant
 
 You have to create four new inputs of type input_select and one of input_boolean.
 
