@@ -36,6 +36,6 @@ All required code can be retrieved from the file within folder "Home Assistant".
 
 After restarting HA, you can add the inputs to your dashboards.
 
-![alt text](https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS.png)?raw=true)
+![alt text](https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS.png?raw=true)
 
 Have fun!
