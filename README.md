@@ -1,5 +1,7 @@
 # BRiO WiL Integration for Home Assistant
 
+![alt text](https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS.png?raw=true)
+
 ## Notice
 
 This is not an official integration of the manufacturer of the device. Also, I am neither in touch nor in contact with the manufacturer.
@@ -35,7 +37,5 @@ You have to create four new inputs of type input_select and one of input_boolean
 All required code can be retrieved from the file within folder "Home Assistant".
 
 After restarting HA, you can add the inputs to your dashboards.
-
-![alt text](https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS.png?raw=true)
 
 Have fun!
