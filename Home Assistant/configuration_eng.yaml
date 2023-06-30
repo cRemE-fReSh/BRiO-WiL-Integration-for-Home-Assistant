@@ -1,0 +1,45 @@
+input_select:
+  pool_uws_mode:
+    name: Pool Light Color
+    options:
+      - Warm white (0)
+      - White (1)
+      - Blue (2)
+      - Lagoon (3)
+      - Cyan (4)
+      - Purple (5)
+      - Magenta (6)
+      - Pink (7)
+      - Red (8)
+      - Orange (9)
+      - Green (10)
+      - Gradient (16)
+      - Rainbow (17)
+      - Parade (18)
+      - Techno (19)
+      - Horizon (20)
+      - Hazard (21)
+      - Magical (22)
+    initial: Warm white (0)
+    icon: mdi:tune-vertical
+  pool_uws_brightness:
+    name: Pool Light Intensity
+    options:
+      - Low (0)
+      - Medium (1)
+      - Strong (2)
+      - Maximum (3)
+    initial: Maximum (3)
+    icon: mdi:brightness-6
+  pool_uws_speed:
+    name: Pool Light Sequence Speed
+    options:
+      - Slow (0)
+      - Medium (1)
+      - Fast (2)
+    initial: Fast (2)
+    icon: mdi:play-speed
+input_boolean:
+  pool_uws_powerswitch:
+    name: Pool Light
+    icon: mdi:light-recessed
