@@ -1,6 +1,6 @@
 # BRiO WiL Integration for Home Assistant
 
-![alt text](https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS.png?raw=true) ![alt text](https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS_eng.png?raw=true)
+<img src="https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS.png?raw=true" title="" alt="alt text" width="322"> <img title="" src="https://github.com/cRemE-fReSh/BRiO-WiL-Integration-for-Home-Assistant/blob/main/Screenshot_HASS_eng.png?raw=true" alt="alt text" width="277">
 
 ## Notice
 
